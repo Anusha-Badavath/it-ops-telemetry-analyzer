@@ -7,7 +7,7 @@ async function loadSystemHealth() {
     try {
 
         const response = await fetch(
-            "http://localhost:8080/api/analytics/health"
+            "https://telemetry-backend-57ll.onrender.com/api/analytics/health"
         );
 
         const health = await response.text();
@@ -52,7 +52,7 @@ async function loadSeverityCounts() {
     try {
 
         const response = await fetch(
-            "http://localhost:8080/api/analytics/severity"
+            "https://telemetry-backend-57ll.onrender.com/api/analytics/severity"
         );
 
         const data = await response.json();
@@ -83,7 +83,7 @@ async function loadComponentStats() {
     try {
 
         const response = await fetch(
-            "http://localhost:8080/api/analytics/components"
+            "https://telemetry-backend-57ll.onrender.com/api/analytics/components"
         );
 
         const data = await response.json();
@@ -134,7 +134,7 @@ async function loadCriticalStats() {
     try {
 
         const response = await fetch(
-            "http://localhost:8080/api/analytics/critical"
+            "https://telemetry-backend-57ll.onrender.com/api/analytics/critical"
         );
 
         const data = await response.json();
@@ -185,7 +185,7 @@ async function loadLogs() {
     try {
 
         const response = await fetch(
-            "http://localhost:8080/api/logs"
+            "https://telemetry-backend-57ll.onrender.com/api/logs"
         );
 
         const logs = await response.json();
