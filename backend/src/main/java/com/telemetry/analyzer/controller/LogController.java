@@ -11,11 +11,9 @@ import com.telemetry.analyzer.parser.LogParser.ParsedLog;
 import com.telemetry.analyzer.service.LogIngestionService;
 
 @RestController
-@CrossOrigin(origins = {
+@CrossOrigin(originPatterns = {
     "http://127.0.0.1:5500",
-    "https://it-ops-telemetry-analyzer-6z91.vercel.app",
-    "https://it-ops-telemetry-analyzer-pdop.vercel.app",
-    "https://it-ops-telemetry-analyzer-kwca78fnt-anusha-c6e3.vercel.app"
+    "https://*.vercel.app"
 })
 public class LogController {
 
