@@ -526,13 +526,10 @@ Automated unit and integration testing
 ## Project Screenshots
 
 ### Dashboard
-
 ![IT Ops Telemetry Dashboard](screenshots/vercelfrontend.png)
 
 ### Vercel Deployment
-
-![Vercel Deployment](screenshots/verceloview.png)
+![Vercel Deployment](screenshots/vercel-overview.png)
 
 ### Render Backend
-
-![Render Backend](screenshots/render%20backend.png)
+![Render Backend](screenshots/render-backend.png)
