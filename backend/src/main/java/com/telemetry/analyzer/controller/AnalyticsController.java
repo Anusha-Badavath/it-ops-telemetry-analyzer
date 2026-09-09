@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.telemetry.analyzer.service.LogAnalyticsService;
 @RestController
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin(originPatterns = {
+    "http://127.0.0.1:5500",
+    "https://*.vercel.app"
+})
 public class AnalyticsController {
 
     private final LogAnalyticsService analyticsService;
