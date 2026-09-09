@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>IT Ops Telemetry Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>IT Ops Telemetry Dashboard</h1>
+        <p>System Monitoring & Log Analytics</p>
+    </header>
+
+    <main>
+
+        <!-- System Health -->
+        <section>
+            <h2>System Health</h2>
+
+            <div id="system-health">
+                Loading...
+            </div>
+        </section>
+
+
+        <!-- Severity Statistics -->
+        <section>
+
+            <h2>Log Severity</h2>
+
+            <div class="stats-container">
+
+                <div class="card severity-info">
+               <h3>INFO</h3>
+                <p id="info-count">0</p>
+                </div>
+
+                <div class="card severity-warning">
+                    <h3>WARN</h3>
+                    <p id="warn-count">0</p>
+                </div>
+
+                <div class="card severity-critical">
+                    <h3>CRITICAL</h3>
+                    <p id="critical-count">0</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Component Statistics -->
+        <section>
+
+            <h2>Component Statistics</h2>
+
+            <div id="component-stats">
+                Loading...
+            </div>
+
+        </section>
+
+
+        <!-- Critical Issues -->
+        <section>
+
+            <h2>Critical Issues by Component</h2>
+
+            <div id="critical-stats">
+                Loading...
+            </div>
+
+        </section>
+        
+        <!-- Recent Logs -->
+<section>
+
+    <h2>Telemetry Logs</h2>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Timestamp</th>
+                    <th>Severity</th>
+                    <th>Component</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+
+            <tbody id="logs-table-body">
+                <tr>
+                    <td colspan="4">Loading logs...</td>
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+    </main>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

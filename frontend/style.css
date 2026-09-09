@@ -1,0 +1,236 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+}
+
+/* Header */
+
+header {
+    background: #1e293b;
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+header p {
+    font-size: 16px;
+    color: #cbd5e1;
+}
+
+/* Main container */
+
+main {
+    width: 92%;
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+/* Sections */
+
+section {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+section h2 {
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+/* System Health */
+
+#system-health {
+    padding: 20px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 10px;
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* Severity cards */
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    padding: 25px;
+    text-align: center;
+    border-radius: 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+}
+
+.card h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+.card p {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+/* Statistics */
+
+#component-stats,
+#critical-stats {
+    display: grid;
+    gap: 10px;
+}
+
+#component-stats p,
+#critical-stats p {
+    padding: 12px 15px;
+    background: #f8fafc;
+    border-radius: 6px;
+    border-left: 4px solid #64748b;
+}
+
+/* Logs table */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 700px;
+}
+
+thead {
+    background: #1e293b;
+    color: white;
+}
+
+th,
+td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* Responsive design */
+
+@media (max-width: 700px) {
+
+    main {
+        width: 95%;
+        margin: 20px auto;
+    }
+
+    header h1 {
+        font-size: 25px;
+    }
+
+    .stats-container {
+        grid-template-columns: 1fr;
+    }
+
+    section {
+        padding: 18px;
+    }
+    
+}
+.health-critical {
+    background: #fee2e2 !important;
+    color: #b91c1c !important;
+}
+
+.health-warning {
+    background: #fef3c7 !important;
+    color: #b45309 !important;
+}
+
+.health-healthy {
+    background: #dcfce7 !important;
+    color: #15803d !important;
+}
+/* Severity card colors */
+
+.severity-info {
+    background: #dcfce7;
+    border-color: #86efac;
+}
+
+.severity-info p {
+    color: #15803d;
+}
+
+.severity-warn {
+    background: #fef3c7;
+    border-color: #fcd34d;
+}
+
+.severity-warn p {
+    color: #b45309;
+}
+
+.severity-critical {
+    background: #fee2e2;
+    border-color: #fca5a5;
+}
+
+.severity-critical p {
+    color: #b91c1c;
+}
+.component-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 18px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+}
+
+.component-item strong {
+    font-size: 20px;
+}
+/* Critical Issues */
+
+.critical-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 15px 18px;
+    margin-bottom: 10px;
+    background: #fee2e2;
+    border: 1px solid #fca5a5;
+    border-radius: 8px;
+}
+
+.critical-item span {
+    font-size: 17px;
+}
+
+.critical-item strong {
+    font-size: 20px;
+    color: #b91c1c;
+}
