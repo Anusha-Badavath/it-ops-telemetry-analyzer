@@ -4,24 +4,27 @@ Forward Deployed Engineer Assessment Project
 
 # IT Ops Telemetry Analyzer
 
-A full-stack IT operations telemetry analyzer that reads raw log data, parses valid log entries, stores them in PostgreSQL, performs log analytics, and displays system health through a web dashboard.
+A full-stack IT Operations Telemetry Analyzer that parses operational log data, stores valid records in PostgreSQL, and provides real-time system health and telemetry analytics through a web dashboard.
 
 ## Project Overview
 
-The IT Ops Telemetry Analyzer converts unstructured operational log data into useful monitoring information.
+The IT Ops Telemetry Analyzer converts unstructured operational log data into structured and actionable information.
 
 The application:
 
-- Reads logs from `logs.txt`
-- Parses log entries using Java Regular Expressions
+- Reads log data from `logs.txt`
+- Parses logs using Java Regular Expressions
 - Extracts timestamp, severity, system component, and log message
 - Skips malformed log lines without crashing
 - Stores valid logs in PostgreSQL
 - Calculates severity statistics
 - Calculates component statistics
-- Identifies critical issues by component
+- Identifies components generating critical events
 - Determines overall system health
-- Displays the results in a responsive web dashboard
+- Displays results through a responsive web dashboard
+- Provides REST APIs for frontend communication
+
+---
 
 ## Architecture
 
@@ -29,68 +32,345 @@ The application:
                 logs.txt
                    |
                    v
-          Log Ingestion Service
+        +---------------------+
+        |   Log Parser        |
+        | Java Regex          |
+        +---------------------+
                    |
                    v
-              Log Parser
-          (Java Regex Pattern)
+        +---------------------+
+        | Spring Boot Backend |
+        | REST APIs           |
+        +---------------------+
                    |
                    v
-              PostgreSQL
+        +---------------------+
+        |    PostgreSQL       |
+        |   telemetry_logs    |
+        +---------------------+
                    |
                    v
-          Spring Boot REST APIs
-                   |
-                   v
-       JavaScript fetch() calls
-                   |
-                   v
-          Telemetry Dashboard
-
-
-Technologies Used
+        +---------------------+
+        | Frontend Dashboard  |
+        | HTML/CSS/JavaScript |
+        +---------------------+
+        Tech Stack
 Backend
 Java 17
 Spring Boot
 Spring Data JPA
 Maven
-Regular Expressions (java.util.regex)
+Regular Expressions
 
 Database
 PostgreSQL
-SQL
-JPA/Hibernate
-
 Frontend
 HTML5
 CSS3
 JavaScript
 Fetch API
-Responsive CSS Grid/Flexbox
+Responsive Flexbox/Grid
 
-Tools
-Visual Studio Code
-pgAdmin 4
-Git/GitHub
+Deployment
+Render - Backend & PostgreSQL
+Vercel - Frontend
+GitHub - Source Code
 
+Features
+1. Log Parsing
+
+The application uses Java Regular Expressions to parse valid log entries.
+
+Each valid log contains:
+
+Timestamp
+Severity
+System Component
+Log Message
+
+example
+2026-08-24 10:33:40 [CRITICAL] Payment-API - Transaction processing failed
+
+2. Malformed Log Handling
+
+Malformed records are safely skipped instead of crashing the application.
+Example malformed record:
+2026-08-24 10:33:40 [MALFORMED_LINE_TEST] Broken-Component-No-Data
+
+The parser returns null for invalid records and the ingestion service logs a warning before continuing with the remaining records
+
+3. PostgreSQL Storage
+
+Valid parsed logs are stored in the telemetry_logs table.
+
+Table structure:
+
+Column	            Type
+id               	BIGSERIAL
+timestamp      	TIMESTAMP
+severity        	VARCHAR
+system_component	VARCHAR
+log_message     	TEXT
+
+Indexes are created for:
+
+Severity
+System Component
+Timestamp
+
+Analytics
+The backend provides the following analytics:
+Severity Statistics
+INFO      4
+WARN      2
+CRITICAL  3
+
+Component Statistics
+
+The application counts telemetry records for each system component.
+
+Critical Statistics
+The application identifies components generating critical events.
+
+System Health
+System health is calculated based on log severity:
+CRITICAL → At least one CRITICAL event exists
+WARNING  → WARN events exist but no CRITICAL events
+HEALTHY  → No WARN or CRITICAL events
+
+REST API Endpoints
+Get Logs
+
+GET /api/logs
+
+Returns all successfully parsed telemetry logs
+
+Get Severity Statistics
+GET /api/analytics/severity
+okay
+show like this
+
+all wrong
+ok na
+
+Aahhh 😄 ippudu ardham ayyindi Anu! Nuvvu README.md lo images kindha display avvali ani antunnav — separate screenshots folder create cheyyadam gurinchi kaadu.
+
+Yes ✅ README lo screenshots add cheyyachu. GitHub lo README open cheste project description kinda images kanipistayi.
+
+Example:
+
+## Dashboard
+
+![IT Ops Telemetry Dashboard](screenshots/dashboard.png)
+
+GitHub README lo ila render avtundi:
+
+Dashboard
+
+🖼️ nee dashboard screenshot
+
+Manam add cheyyalsina sections
+## Project Screenshots
+
+### 1. Dashboard
+![Dashboard](screenshots/dashboard.png)
+
+### 2. Render Backend
+![Render Backend](screenshots/render-backend.png)
+
+### 3. PostgreSQL Database
+![PostgreSQL Database](screenshots/database.png)
+
+Important: Images ni GitHub repository lo upload cheyyali; README lo aa image path ni reference chestham. Appudu README kinda images visible avutayi.
+
+👉 Nee point correct. Separate page lo kaadu — README open chesinappudu content kinda screenshots kanipinchela chestham.
+
+Next manam README ni complete professional ga prepare cheddam, screenshots place kuda include chesi.
+
+ok read me pamu
+
+Sure Anu. Nee project ki direct ga GitHub README.md lo paste cheyyagalige complete README idi.
+
+# IT Ops Telemetry Analyzer
+
+A full-stack IT Operations Telemetry Analyzer that parses operational log data, stores valid records in PostgreSQL, and provides real-time system health and telemetry analytics through a web dashboard.
+
+## Project Overview
+
+The IT Ops Telemetry Analyzer converts unstructured operational log data into structured and actionable information.
+
+The application:
+
+- Reads log data from `logs.txt`
+- Parses logs using Java Regular Expressions
+- Extracts timestamp, severity, system component, and log message
+- Skips malformed log lines without crashing
+- Stores valid logs in PostgreSQL
+- Calculates severity statistics
+- Calculates component statistics
+- Identifies components generating critical events
+- Determines overall system health
+- Displays results through a responsive web dashboard
+- Provides REST APIs for frontend communication
+
+---
+
+## Architecture
+
+```text
+                logs.txt
+                   |
+                   v
+        +---------------------+
+        |   Log Parser        |
+        | Java Regex          |
+        +---------------------+
+                   |
+                   v
+        +---------------------+
+        | Spring Boot Backend |
+        | REST APIs           |
+        +---------------------+
+                   |
+                   v
+        +---------------------+
+        |    PostgreSQL       |
+        |   telemetry_logs    |
+        +---------------------+
+                   |
+                   v
+        +---------------------+
+        | Frontend Dashboard  |
+        | HTML/CSS/JavaScript |
+        +---------------------+
+Tech Stack
+Backend
+Java 17
+Spring Boot
+Spring Data JPA
+Maven
+Regular Expressions
+Database
+PostgreSQL
+Frontend
+HTML5
+CSS3
+JavaScript
+Fetch API
+Responsive Flexbox/Grid
+Deployment
+Render - Backend & PostgreSQL
+Vercel - Frontend
+GitHub - Source Code
+Features
+1. Log Parsing
+
+The application uses Java Regular Expressions to parse valid log entries.
+
+Each valid log contains:
+
+Timestamp
+Severity
+System Component
+Log Message
+
+Example:
+
+2026-08-24 10:33:40 [CRITICAL] Payment-API - Transaction processing failed
+2. Malformed Log Handling
+
+Malformed records are safely skipped instead of crashing the application.
+
+Example malformed record:
+
+2026-08-24 10:33:40 [MALFORMED_LINE_TEST] Broken-Component-No-Data
+
+The parser returns null for invalid records and the ingestion service logs a warning before continuing with the remaining records.
+
+3. PostgreSQL Storage
+
+Valid parsed logs are stored in the telemetry_logs table.
+
+Table structure:
+
+Column	Type
+id	BIGSERIAL
+timestamp	TIMESTAMP
+severity	VARCHAR
+system_component	VARCHAR
+log_message	TEXT
+
+Indexes are created for:
+
+Severity
+System Component
+Timestamp
+Analytics
+
+The backend provides the following analytics:
+
+Severity Statistics
+INFO      4
+WARN      2
+CRITICAL  3
+Component Statistics
+
+The application counts telemetry records for each system component.
+
+Critical Statistics
+
+The application identifies components generating critical events.
+
+System Health
+
+System health is calculated based on log severity:
+
+CRITICAL → At least one CRITICAL event exists
+WARNING  → WARN events exist but no CRITICAL events
+HEALTHY  → No WARN or CRITICAL events
+REST API Endpoints
+Get Logs
+GET /api/logs
+
+Returns all successfully parsed telemetry logs.
+
+Get Severity Statistics
+GET /api/analytics/severity
+Returns log counts grouped by severity
+
+Get Component Statistics
+GET /api/analytics/components
+Returns log counts grouped by system component.
+
+
+Get Critical Statistics
+GET /api/analytics/critical
+Returns critical event counts grouped by system component
+
+Get System Health
+GET /api/analytics/health
+Returns the current overall system health.
+
+
+Project Structure
 it-ops-telemetry-analyzer/
 │
 ├── backend/
+│   ├── src/
+│   │   └── main/
+│   │       └── java/
+│   │           └── com/
+│   │               └── telemetry/
+│   │                   └── analyzer/
+│   │                       ├── controller/
+│   │                       ├── model/
+│   │                       ├── parser/
+│   │                       ├── repository/
+│   │                       └── service/
+│   │
+│   ├── Dockerfile
 │   ├── pom.xml
-│   └── src/
-│       └── main/
-│           ├── java/
-│           │   └── com/
-│           │       └── telemetry/
-│           │           └── analyzer/
-│           │               ├── controller/
-│           │               ├── model/
-│           │               ├── parser/
-│           │               ├── repository/
-│           │               └── service/
-│           │
-│           └── resources/
-│               └── application.properties
+│   └── logs.txt
 │
 ├── database/
 │   └── schema.sql
@@ -103,224 +383,156 @@ it-ops-telemetry-analyzer/
 ├── logs.txt
 └── README.md
 
-Log Format
+Local Setup
+Prerequisites
 
-Valid logs follow this structure:
+Install:
 
-YYYY-MM-DD HH:mm:ss [SEVERITY] COMPONENT - MESSAGE
+Java 17
+Maven
+PostgreSQL
+Git
 
+1. Clone the repository
+git clone https://github.com/Anusha-Badavath/it-ops-telemetry-analyzer.git
 
-example:
-2026-08-24 10:18:12 [CRITICAL] Gateway-Router - Firewalled packet drop rate exceeded safety limits
+cd it-ops-telemetry-analyzer
 
-The parser extracts:
+2. Create PostgreSQL Database
+Create a database named:
+telemetry_analyzer
 
-Timestamp
-Severity
-System Component
-Log Message
-
-Malformed Log Handling
-
-The application uses defensive parsing.
-
-If a log line does not match the expected pattern, it is skipped instead of causing the application to crash.
-
-Example malformed line:
-2026-08-24 10:33:40 [MALFORMED_LINE_TEST] Broken-Component-No-Data
-
-
-This line is rejected because the application accepts only:
-
-INFO
-WARN
-CRITICAL
-
-Malformed entries are logged as warnings.
-
-
-Database
-
-The application stores valid logs in the PostgreSQL table:
-
-telemetry_logs
-
-Columns:
-
-Column	                  Type
-id          	        BIGSERIAL
-timestamp           	TIMESTAMP
-severity	           VARCHAR(20)
-system_component	  VARCHAR(100)
-log_message	            TEXT
-
-
-Indexes are created for:
-
-Severity
-System component
-Timestamp
-
-The complete database setup is available in:
-
+Then execute:
 database/schema.sql
 
+3. Configure Environment Variables
 
-REST API Endpoints
-Get Logs
-GET /api/logs
+The backend uses environment variables for database configuration.
 
-Severity Statistics
-GET /api/analytics/severity
-Returns the number of logs for each severity.
+DB_URL
+DB_USER
+DB_PASSWORD
 
 Example:
-{
-  "INFO": 4,
-  "WARN": 2,
-  "CRITICAL": 3
-}
 
+DB_URL=jdbc:postgresql://localhost:5433/telemetry_analyzer
+DB_USER=your_database_user
+DB_PASSWORD=your_database_password
 
-Component Statistics
-GET /api/analytics/components
+Do not commit database passwords or other secrets to GitHub.
 
-Critical Issues
-GET /api/analytics/critical
-Returns critical log counts grouped by component.
+4. Run Backend
 
-System Health
-GET /api/analytics/health
-
-Returns the overall system health
-Possible values
-HEALTHY
-WARNING
-CRITICAL
-
-
-System Health Logic
-
-The application determines system health based on severity
-
-If CRITICAL logs > 0
-        |
-        v
-     CRITICAL
-
-Otherwise if WARN logs > 0
-        |
-        v
-     WARNING
-
-Otherwise
-        |
-        v
-     HEALTHY
-
-
-     Running the Backend
-
-Navigate to the backend directory:
+Go to:
 
 cd backend
 
-Build the project:
+Build:
 
-mvn clean install
+mvn clean package
 
-Start Spring Boot:
+Run:
 
 mvn spring-boot:run
 
-The backend runs on:
+Backend runs on:
 
 http://localhost:8080
-Running the Frontend
+5. Run Frontend
 
-Open the frontend using a local web server such as VS Code Live Server.
+Open the frontend folder using VS Code Live Server.
 
 Example:
 
-http://127.0.0.1:5500/it-ops-telemetry-analyzer/frontend/index.html
+http://127.0.0.1:5500
 
-The frontend communicates with the Spring Boot backend using JavaScript fetch().
+The frontend communicates with the Spring Boot REST APIs using JavaScript Fetch API.
 
-Database Configuration
+Docker
 
-PostgreSQL connection is configured in:
+The backend includes a multi-stage Dockerfile.
 
-backend/src/main/resources/application.properties
+Build the Docker image:
 
-Example configuration:
+docker build -t telemetry-analyzer ./backend
 
-spring.datasource.url=jdbc:postgresql://localhost:5433/telemetry_analyzer
-spring.datasource.username=postgres
-spring.datasource.password=YOUR_POSTGRES_PASSWORD
+Run the container:
 
-Do not commit real database passwords to GitHub.
+docker run -p 8080:8080 telemetry-analyzer
+Deployment
+Backend
 
-Dashboard Features
+The Spring Boot backend is deployed using Render.
+
+Backend:
+
+https://telemetry-backend-57ll.onrender.com
+Frontend
+
+The frontend is deployed using Vercel.
+
+Production frontend:
+
+https://it-ops-telemetry-analyzer-6z91.vercel.app
+
+Dashboard
 
 The dashboard displays:
 
-System health
-INFO log count
-WARN log count
-CRITICAL log count
-Component statistics
-Critical issues by component
-Complete telemetry logs
+Overall System Health
+Log Severity Statistics
+Component Statistics
+Critical Event Statistics
+Parsed Log Records
 
-The dashboard updates the page dynamically using JavaScript without requiring a full page reload.
+The dashboard updates data asynchronously using the JavaScript Fetch API without requiring a full page refresh.
 
-Current Test Data
+Error Handling
 
-The supplied test data contains:
+The application follows defensive parsing principles.
 
-INFO      : 4
-WARN      : 2
-CRITICAL  : 3
-Valid Logs: 9
-Malformed : 1
+If a log line is malformed:
 
-Therefore the current system health is:
+Invalid log → Skip record → Log warning → Continue processing
 
-CRITICAL
-Defensive Engineering
+Therefore, a single corrupted log record does not stop the entire ingestion process.
 
-The application is designed to continue processing when invalid log data is encountered.
+Database Schema
 
-Invalid entries are:
+The database schema is available in:
 
-1.Detected using the regular expression parser
-2.Rejected safely
-3.Logged as warnings
-4.Excluded from database insertion
+database/schema.sql
 
-This prevents a single malformed log from stopping the entire ingestion process.
+The schema creates the:
+
+telemetry_logs
+
+table along with indexes for commonly queried columns.
 
 Future Improvements
 
-Possible future enhancements include:
+Possible future improvements include:
 
-Automatic scheduled log ingestion
+Scheduled/continuous log ingestion
 Pagination for large log datasets
-Search and filtering
-Charts for telemetry trends
-Docker deployment
-Cloud deployment using Render or Railway
-Frontend deployment using Vercel or Netlify
+Advanced filtering and search
+Authentication and authorization
+Historical health trends
+Charts and visual analytics
+Automated CI/CD pipeline
+Automated unit and integration testing
 
-### After pasting
 
+## Project Screenshots
 
-### After pasting
+### Dashboard
 
-Save:
+![IT Ops Telemetry Dashboard](screenshots/vercelfrontend.png)
 
-**`Ctrl + S`**
+### Vercel Deployment
 
-Then tell me **`README done`**.
+![Vercel Deployment](screenshots/verceloview.png)
 
-After that, we'll do a very important **final project check** before deployment: verify backend + database + frontend together and make sure there are no remaining issues.
+### Render Backend
+
+![Render Backend](screenshots/render%20backend.png)
